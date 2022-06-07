@@ -42,6 +42,9 @@
 #define delay_ms(a)    usleep(a*1000)
 #define printf_P	printf
 
+//#define MPU9250
+//#define MPU_DEBUG
+
 #if !defined MPU6050 && !defined MPU9150 && !defined MPU6500 && !defined MPU9250
 #error  Which gyro are you using? Define MPUxxxx in your compiler options.
 #endif
@@ -57,6 +60,7 @@
  * #define MPU6500
  * #define AK8963_SECONDARY
  */
+
 #if defined MPU9150
 #ifndef MPU6050
 #define MPU6050
@@ -84,6 +88,7 @@
 #endif
 
 static int set_int_enable(uint8_t enable);
+
 
 /* Hardware registers needed by driver. */
 struct gyro_reg_s
@@ -386,6 +391,8 @@ enum lp_accel_rate_e
 #define AKM_WHOAMI      (0x48)
 #endif
 
+
+/*
 #if defined MPU6050
 const struct gyro_reg_s reg =
 {
@@ -451,12 +458,12 @@ const struct test_s test =
 {
 	.gyro_sens      = 32768/250,
 	.accel_sens     = 32768/16,
-	.reg_rate_div   = 0,    /* 1kHz. */
-	.reg_lpf        = 1,    /* 188Hz. */
-	.reg_gyro_fsr   = 0,    /* 250dps. */
-	.reg_accel_fsr  = 0x18, /* 16g. */
+	.reg_rate_div   = 0,    // 1kHz. 
+	.reg_lpf        = 1,    // 188Hz. /
+	.reg_gyro_fsr   = 0,    // 250dps./
+	.reg_accel_fsr  = 0x18, // 16g. /
 	.wait_ms        = 50,
-	.packet_thresh  = 5,    /* 5% */
+	.packet_thresh  = 5,    // 5% /
 	.min_dps        = 10.f,
 	.max_dps        = 105.f,
 	.max_gyro_var   = 0.14f,
@@ -472,6 +479,7 @@ static struct gyro_state_s st =
 	.test = &test
 };
 #elif defined MPU6500
+*/
 const struct gyro_reg_s reg =
 {
 	.who_am_i       = 0x75,
@@ -555,7 +563,7 @@ static struct gyro_state_s st =
 	.hw = &hw,
 	.test = &test
 };
-#endif
+//#endif
 
 #define MAX_PACKET_LENGTH (12)
 
@@ -717,7 +725,7 @@ uint8_t mpu_init(struct int_param_s *int_param)
 	}
 #elif defined MPU6500
 #define MPU6500_MEM_REV_ADDR    (0x17)
-	if (mpu_read_mem(MPU6500_MEM_REV_ADDR, 1, &rev))
+/*	if (mpu_read_mem(MPU6500_MEM_REV_ADDR, 1, &rev))
 		return 1;
 	if (rev == 0x1)
 		st.chip_cfg.accel_half = 0;
@@ -728,7 +736,7 @@ uint8_t mpu_init(struct int_param_s *int_param)
 #endif
 		return 1;
 	}
-
+*/
 	/* MPU6500 shares 4kB of memory between the DMP and the FIFO. Since the
 	 * first 3kB are needed by the DMP, we'll use the last 1kB for the FIFO.
 	 */
@@ -784,7 +792,7 @@ uint8_t mpu_init(struct int_param_s *int_param)
 		return 1;
 #endif
 
-	mpu_set_sensors(0);
+	mpu_set_sensors(1);
 #if defined MPU_DEBUG
 	printf_P("Initializing is done...\r\n");
 #endif
