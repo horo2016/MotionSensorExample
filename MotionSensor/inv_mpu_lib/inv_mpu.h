@@ -26,7 +26,9 @@
 #define INV_XYZ_GYRO    (INV_X_GYRO | INV_Y_GYRO | INV_Z_GYRO)
 #define INV_XYZ_ACCEL   (0x08)
 #define INV_XYZ_COMPASS (0x01)
-
+#ifdef __cplusplus
+extern "C" {
+#endif
 struct int_param_s
 {
 #if defined EMPL_TARGET_MSP430 || defined MOTION_DRIVER_TARGET_MSP430
@@ -115,6 +117,8 @@ uint8_t mpu_load_firmware(uint16_t length, const uint8_t *firmware, uint16_t sta
 uint8_t mpu_reg_dump(void);
 uint8_t mpu_read_reg(uint8_t reg, uint8_t *data);
 uint8_t mpu_run_self_test(int32_t *gyro, int32_t *accel);
-
+#ifdef __cplusplus
+}
+#endif
 #endif  /* _INV_MPU_H_ */
 
