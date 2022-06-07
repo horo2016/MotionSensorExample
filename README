@@ -1,7 +1,7 @@
 MotionSensorExample
 ===================
 
-MPU6050/MPU6500/MPU9150/MPU9250 over I2c for lINUX using official Invensense libraries (v5.1):
+This project uesd only MPU9250 over I2c for lINUX using official Invensense libraries (v5.1):
 http://www.invensense.com/developers/index.php?_r=downloads
 
 
@@ -20,8 +20,8 @@ and calculates Yaw, Pitch, Roll in degrees which in turn is displayed as an outp
 I2C uses only2 wires for data transmission: SCL and SDA
 RPi pin 3 -> MPU SDA
 RPi pin 5 -> MPU SCL
- **OTHER pi**
- please  find iic pin connect !
+ **OTHER pi (orange pi,nano pi and so on)**
+ please  find iic pin and  connect them!then  modify all i2c fd (fd = open("/dev/i2c-3",xx))in file I2CDev.c . 
 
 You will also need to provide power (3.3V) to your MPU. You can use external power or hook it up with RPi.
 For example:
@@ -30,7 +30,7 @@ RPi pin 6 (Ground) -> MPU GND
 
 
 **Compilation:**
-On Pi, edit MotionSensor/Makefile and adjust CXX_OPTS to specify your board (-DMPU6050 for MPU6050, -DMPU9150 for MPU9150), issue make
+On yourPi, edit MotionSensor/Makefile and adjust CXX_OPTS to specify your board ( -DMPU9250 for MPU9250), issue make
 
 
 **Cross compiling:**
