@@ -3,7 +3,7 @@
 #include <math.h>
 #include <time.h>
 
-#include "MotionSensor.h"
+#include "sensor.h"
 
 #define delay_ms(a) usleep(a*1000)
 
