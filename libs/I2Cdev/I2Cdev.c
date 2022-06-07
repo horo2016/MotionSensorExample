@@ -181,10 +181,10 @@ int8_t readBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t *data
 #ifdef DEBUG
     printf("read %#x %#x %u\n",devAddr,regAddr,length);
 #endif
-    int fd = open("/dev/i2c-1", O_RDWR);
+    int fd = open("/dev/i2c-3", O_RDWR);
 
     if (fd < 0) {
-        fprintf(stderr, "Failed to open device: %s\n", strerror(errno));
+        fprintf(stderr, "Failed to open device: %s in /dev/i2c-3\n", strerror(errno));
         return(-1);
     }
     if (ioctl(fd, I2C_SLAVE, devAddr) < 0) {
@@ -349,16 +349,16 @@ int writeBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t* data) 
     int fd;
 
 #ifdef DEBUG
-    printf("write %#x %#x\n",devAddr,regAddr);
+    printf("write %#x %#x %#x\n",devAddr,regAddr,data[0]);
 #endif
     if (length > 127) {
         fprintf(stderr, "Byte write count (%d) > 127\n", length);
         return -1;
     }
 
-    fd = open("/dev/i2c-1", O_RDWR);
+    fd = open("/dev/i2c-3", O_RDWR);
     if (fd < 0) {
-        fprintf(stderr, "Failed to open device: %s\n", strerror(errno));
+        fprintf(stderr, "Failed to open device: %s\n in /dev/ic-3", strerror(errno));
         return -1;
     }
     if (ioctl(fd, I2C_SLAVE, devAddr) < 0) {
@@ -403,9 +403,9 @@ int writeWords(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint16_t* data)
         return -1;
     }
 
-    fd = open("/dev/i2c-1", O_RDWR);
+    fd = open("/dev/i2c-3", O_RDWR);
     if (fd < 0) {
-        fprintf(stderr, "Failed to open device: %s\n", strerror(errno));
+        fprintf(stderr, "Failed to open device: %s in /dev/i2c-3\n", strerror(errno));
         return -1;
     }
     if (ioctl(fd, I2C_SLAVE, devAddr) < 0) {
