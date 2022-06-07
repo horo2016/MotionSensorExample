@@ -1,6 +1,6 @@
 MotionSensorExample
 ===================
-
+本工程修改了makefile 和.c文件，以使工程适用于所有的Pi和linux 系统，目前使用MPu9250在Linux下可以正常使用。
 This project uesd only MPU9250 over I2c for lINUX using official Invensense libraries (v5.1):
 http://www.invensense.com/developers/index.php?_r=downloads
 
